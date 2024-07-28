@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Home</title>
+</head>
+<body>
+    <h1>Welcome to the Attendance System</h1>
+    <p>Current Date: {{ current_date }}</p>
+    <p>Current Time: {{ current_time }}</p>
+    <a href="{% url 'upload_employee' %}">Upload Employee</a>
+    <br>
+    <a href="{% url 'start_attendance' %}">Start Attendance</a>
+    <br>
+    <a href="{% url 'stop_attendance' %}">Stop Attendance</a>
+    <br>
+    <a href="{% url 'mark_latecomers' %}">Mark Latecomers</a>
+</body>
+</html>

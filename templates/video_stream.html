@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Stream</title>
+</head>
+<body>
+    <h1>Live Video Stream</h1>
+    <img src="{% url 'video_feed' %}" width="640" height="480" alt="Video Feed">
+    <h2>Current Attendees</h2>
+    <ul id="attendees-list">
+        {% for attendee in current_attendees %}
+            <li>{{ attendee }}</li>
+        {% endfor %}
+    </ul>
+    <script>
+        function fetchCurrentAttendees() {
+            fetch("{% url 'get_current_attendees' %}")
+                .then(response => response.json())
+                .then(data => {
+                    const attendeesList = document.getElementById('attendees-list');
+                    attendeesList.innerHTML = '';
+                    data.attendees.forEach(attendee => {
+                        const li = document.createElement('li');
+                        li.textContent = attendee;
+                        attendeesList.appendChild(li);
+                    });
+                });
+        }
+        setInterval(fetchCurrentAttendees, 5000);  // Fetch attendees every 5 seconds
+    </script>
+</body>
+</html>
